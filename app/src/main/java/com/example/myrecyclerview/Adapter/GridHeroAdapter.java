@@ -22,6 +22,12 @@ public class GridHeroAdapter extends RecyclerView.Adapter<GridHeroAdapter.GridVi
         this.listHero = list;
     }
 
+    private OnItemClickCallback onItemClickCallback;
+
+    public void setOnItemClickCallback(OnItemClickCallback onItemClickCallback){
+        this.onItemClickCallback = onItemClickCallback;
+    }
+
     @NonNull
     @Override
     public GridHeroAdapter.GridViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -50,5 +56,9 @@ public class GridHeroAdapter extends RecyclerView.Adapter<GridHeroAdapter.GridVi
             super(itemView);
             imgPhoto = itemView.findViewById(R.id.img_item_photo);
         }
+    }
+
+    public interface OnItemClickCallback{
+        void onItemClicked(Hero dataHero2);
     }
 }

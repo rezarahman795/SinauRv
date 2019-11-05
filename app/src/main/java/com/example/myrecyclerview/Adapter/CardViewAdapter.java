@@ -24,6 +24,12 @@ public class CardViewAdapter extends RecyclerView.Adapter<CardViewAdapter.CardVi
         this.cardHero = list;
     }
 
+    private OnItemClickCallback onItemClickCallback;
+
+    public void setOnItemClickCallback(OnItemClickCallback onItemClickCallback){
+        this.onItemClickCallback = onItemClickCallback;
+    }
+
     @NonNull
     @Override
     public CardViewAdapter.CardViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -59,6 +65,14 @@ public class CardViewAdapter extends RecyclerView.Adapter<CardViewAdapter.CardVi
                     cardHero.get(holder.getAdapterPosition()).getName(),Toast.LENGTH_LONG).show();
             }
         });
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(holder.itemView.getContext(),"kamu memilih "+
+                        cardHero.get(holder.getAdapterPosition()).getName(),Toast.LENGTH_LONG).show();
+            }
+        });
     }
 
     @Override
@@ -80,5 +94,9 @@ public class CardViewAdapter extends RecyclerView.Adapter<CardViewAdapter.CardVi
             btnFav = itemView.findViewById(R.id.btn_set_fav);
             btnShare = itemView.findViewById(R.id.btn_set_share);
         }
+    }
+
+    public interface OnItemClickCallback{
+        void onItemClicked(Hero dataHero);
     }
 }
